@@ -1,9 +1,9 @@
-package main.java.Registraduria.Seguridad.Modelos;
+package Registraduria.Seguridad.Modelos;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Data
-@Document
+@Document()
 public class Rol {
     @Id
     private String id_rol;

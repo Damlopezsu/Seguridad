@@ -1,6 +1,6 @@
-package main.java.Registraduria.Seguridad.Controladores;
-import main.java.Registraduria.Seguridad.Modelos.Permiso;
-import main.java.Registraduria.Seguridad.Repositorios.RepositorioPermiso;
+package Registraduria.Seguridad.Controladores;
+import Registraduria.Seguridad.Modelos.Permiso;
+import Registraduria.Seguridad.Repositorios.RepositorioPermiso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 @CrossOrigin
-@RestContPermisoler
+@RestController
 @RequestMapping("/Permiso")
-public class ContPermisoadorPermiso {
+public class ControladorPermiso {
     @Autowired
 
     private RepositorioPermiso miRepositorioPermiso;

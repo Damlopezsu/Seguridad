@@ -1,10 +1,9 @@
-
-package main.java.Registraduria.Seguridad.Modelos;
+package Registraduria.Seguridad.Modelos;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Data
-@Document
+@Document()
 public class Usuario {
     @Id
     private String cedula;
@@ -12,7 +11,7 @@ public class Usuario {
     private String correo;
     private String contrasena;
 
-    public Usuario(String seudonimo, String correo,String contraseña) {
+    public Usuario(String seudonimo, String correo, String contrasena) {
         this.seudonimo = seudonimo;
         this.correo =correo;
         this.contrasena = contrasena;
