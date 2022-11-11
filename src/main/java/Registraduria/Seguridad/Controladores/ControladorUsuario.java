@@ -1,5 +1,7 @@
 package Registraduria.Seguridad.Controladores;
 import Registraduria.Seguridad.Modelos.Usuario;
+import Registraduria.Seguridad.Modelos.Rol;
+import Registraduria.Seguridad.Repositorios.RepositorioRol;
 import Registraduria.Seguridad.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +14,9 @@ import java.security.NoSuchAlgorithmException;
 @RequestMapping("/usuarios")
 public class ControladorUsuario {
     @Autowired
-
     private RepositorioUsuario miRepositorioUsuario;
+    @Autowired
+    private RepositorioRol miRepositorioRol;
     @GetMapping("")
     public List<Usuario> index(){
         return this.miRepositorioUsuario.findAll();
@@ -32,12 +35,12 @@ public class ControladorUsuario {
         return usuarioActual;
     }
     @PutMapping("{id}")
-    public Usuario update(@PathVariable String id,@RequestBody Usuario
-            infoUsuario){
+    public Usuario update(@PathVariable String id,@RequestBody Usuario infoUsuario){
         Usuario usuarioActual=this.miRepositorioUsuario
                 .findById(id)
                 .orElse(null);
         if (usuarioActual!=null){
+            usuarioActual.setCedula(infoUsuario.getCedula());
             usuarioActual.setSeudonimo(infoUsuario.getSeudonimo());
             usuarioActual.setCorreo(infoUsuario.getCorreo());
             usuarioActual.setContrasena(convertirSHA256(infoUsuario.getContrasena()))
@@ -56,6 +59,22 @@ public class ControladorUsuario {
         if (usuarioActual!=null){
             this.miRepositorioUsuario.delete(usuarioActual);
         }
+    }
+    @PutMapping("{id}/rol/{id_rol}")
+    public Usuario asignarRolAUsuario(@PathVariable String id,@PathVariable String id_rol){
+        Usuario usuarioActual=this.miRepositorioUsuario
+                .findById(id)
+                .orElse(null);
+        Rol rolActual=this.miRepositorioRol
+                .findById(id_rol)
+                .orElse(null);
+        if (usuarioActual!=null && rolActual!=null){
+            usuarioActual.setRol(rolActual);
+            return this.miRepositorioUsuario.save(usuarioActual);
+        }else{
+            return null;
+        }
+
     }
     public String convertirSHA256(String password) {
         MessageDigest md = null;

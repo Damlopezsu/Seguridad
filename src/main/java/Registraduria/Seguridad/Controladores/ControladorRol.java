@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 @CrossOrigin
 @RestController
-@RequestMapping("/Rol")
+@RequestMapping("/rol")
 public class ControladorRol {
     @Autowired
 

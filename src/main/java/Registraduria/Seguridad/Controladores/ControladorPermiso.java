@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 @CrossOrigin
 @RestController
-@RequestMapping("/Permiso")
+@RequestMapping("/permiso")
 public class ControladorPermiso {
     @Autowired
 
